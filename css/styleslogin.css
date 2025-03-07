@@ -2,7 +2,6 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #F9F9F9;
-
 }
 
 /* Estilos del header */
@@ -14,64 +13,8 @@ header {
     background-color: #f8f9fa;
 }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-/* Estilos del carrusel */
-.carousel-item {
-    height: 700px;
-}
-
-.carousel-item img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-   
-}
 
 
-
-.carousel-caption h1 {
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.carousel-caption .btn {
-    padding: 10px 20px;
-    font-size: 18px;
-}
-/* Capa oscura sobre la imagen */
-.carousel-item::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* Oscurece un 20% */
-}
-
-
-.carousel-caption {
-   
-    padding: 300px;
-    border-radius: 10px;
-    z-index: 2;
-}
 /* Estilos del contenedor del login */
 .login-container {
     width: 500px;
