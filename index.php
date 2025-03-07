@@ -23,8 +23,9 @@
             </ul>
         </nav>
         <div>
-            <button class="btn btn-primary">Agendar Cita</button>
-            <button class="btn btn-secondary">Iniciar Sesión</button>
+            <button class="btn btn-primary ">Agendar Cita</button>
+            <button class="btn btn-secondary"  onclick="window.location.href='login.php'" >Iniciar Sesión</button>
+            
         </div>
     </header>
 
