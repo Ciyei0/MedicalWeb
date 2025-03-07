@@ -1,4 +1,6 @@
 -- Crear una Base de Datos llamada  medicalweb 
+
+CREATE DATABASE IF NOT EXISTS medicalweb;
 -- medicalweb 
 
 
