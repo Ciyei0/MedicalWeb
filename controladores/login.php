@@ -4,6 +4,9 @@ session_start();
 // Incluir la conexión desde la carpeta config
 require_once '../config/conexion.php'; 
 
+// Variables de error y éxito
+$error = "";
+
 // Verificar que el formulario fue enviado correctamente
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = isset($_POST["nombre_usuario"]) ? trim($_POST["nombre_usuario"]) : null;
@@ -27,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($user && password_verify($contrasena, $user["password_hash"])) {
                 $_SESSION["usuario_id"] = $user["id"];
                 $_SESSION["nombre_usuario"] = $usuario;
-                header("Location: controlpanel.php"); 
+                header("Location: ../vistas/controlpanel.php"); 
                 exit();
             } else {
                 $error = "Credenciales inválidas.";
@@ -37,33 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// Incluir la vista del login
+include '../vistas/login_view.php';
+
 ?>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="../css/styleslogin.css">
-
-</head>
-<body>
-    <div class="login-container">
-        <h2>Iniciar sesión</h2>
-        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-        <form method="POST" action="">
-            <label for="nombre_usuario">Usuario:</label>
-            <input type="text" name="nombre_usuario" required>
-            <br>
-            <label for="clave">Contraseña:</label>
-            <input type="password" name="clave" required>
-            <br>
-            <button type="submit">Ingresar</button>
-        </form>
-    </div>
-</body>
-</html>

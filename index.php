@@ -24,7 +24,7 @@
         </nav>
         <div>
             <button class="btn btn-primary "  onclick="window.location.href='vistas/citas/cita.php'">Agendar Cita</button>
-            <button class="btn btn-secondary"  onclick="window.location.href='vistas/login.php'" >Iniciar Sesión</button>
+            <button class="btn btn-secondary"  onclick="window.location.href='vistas/login_view.php'" >Iniciar Sesión</button>
             
         </div>
     </header>
