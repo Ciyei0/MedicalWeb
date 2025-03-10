@@ -1,8 +1,8 @@
 <?php
 require_once '../config/conexion.php';
-
+//convertir contraseñas a hash
 try {
-    // Obtener todos los usuarios
+   
     $stmt = $pdo->query("SELECT id, password_hash FROM usuarios");
     $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -10,7 +10,7 @@ try {
         $id = $usuario['id'];
         $contrasena = $usuario['password_hash']; 
 
-        // Verificar si ya está en hash (bcrypt genera cadenas de 60 caracteres)
+        
         if (strlen($contrasena) < 60) {
             // Generar el hash
             $hash = password_hash($contrasena, PASSWORD_BCRYPT);
