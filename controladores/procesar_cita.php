@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre_medico = $medico['nombre'] . ' ' . $medico['apellido'];
     $especialidad_medico = $medico['especialidad'];
 
-    // Enviar correo de confirmación usando PHPMailer
+    // Enviar correo de confirmacion usando PHPMailer
     $mail = new PHPMailer(true);
     try {
         // Configuración del servidor SMTP
