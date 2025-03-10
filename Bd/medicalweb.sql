@@ -1,15 +1,5 @@
-<<<<<<< HEAD
--- Crear una Base de Datos llamada  medicalweb 
-
-CREATE DATABASE IF NOT EXISTS medicalweb;
--- medicalweb 
-
-
-
-=======
 -- Crear la Base de Datos si no existe
 CREATE DATABASE IF NOT EXISTS medicalweb;
->>>>>>> fbc69b36b7664d692cc59783aa1fad17a309a1a8
 USE medicalweb;
 
 -- Tabla de Permisos
