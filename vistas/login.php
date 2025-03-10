@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+// Activar errores de PHP
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Incluir la conexión desde la carpeta config
 require_once '../config/conexion.php'; 
 
@@ -33,12 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error = "Credenciales inválidas.";
             }
         } catch (Exception $e) {
-            $error = "Error interno. Intente nuevamente.";
+            $error = "Error interno: " . $e->getMessage(); // Mostrar el mensaje de la excepción
         }
     }
 }
 ?>
-
 
 
 <!DOCTYPE html>
