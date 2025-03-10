@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- Crear una Base de Datos llamada  medicalweb 
 
 CREATE DATABASE IF NOT EXISTS medicalweb;
@@ -5,6 +6,10 @@ CREATE DATABASE IF NOT EXISTS medicalweb;
 
 
 
+=======
+-- Crear la Base de Datos si no existe
+CREATE DATABASE IF NOT EXISTS medicalweb;
+>>>>>>> fbc69b36b7664d692cc59783aa1fad17a309a1a8
 USE medicalweb;
 
 -- Tabla de Permisos
@@ -13,9 +18,9 @@ CREATE TABLE permiso (
     permiso VARCHAR(50) NOT NULL UNIQUE
 );
 
-INSERT INTO `permiso` (`id`, `permiso`) VALUES
-(1, 'Escritorio'),
-(2, 'Citas');
+INSERT INTO permiso (permiso) VALUES
+('Escritorio'),
+('Citas');
 
 -- Tabla de Usuarios (Solo Médicos y Administración)
 CREATE TABLE Usuarios (
@@ -23,8 +28,8 @@ CREATE TABLE Usuarios (
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    nombre_usuario VARCHAR(50) NOT NULL,
-    clave VARCHAR(255) NOT NULL,
+    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
     cedula VARCHAR(20) NULL,
     telefono VARCHAR(20) NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -36,6 +41,7 @@ CREATE TABLE usuario_permiso (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_permiso INT NOT NULL,
+    UNIQUE (id_usuario, id_permiso),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (id_permiso) REFERENCES permiso(id) ON DELETE CASCADE
 );
@@ -64,8 +70,6 @@ CREATE TABLE Pacientes (
     apellido VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(20) NULL,
-    fecha_nacimiento DATE NOT NULL,
-    direccion TEXT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -87,9 +91,11 @@ CREATE TABLE Citas (
 CREATE TABLE Horarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_medico INT NOT NULL,
-    dia_semana ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo') NOT NULL,
+    dia_semana ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,
     hora_inicio TIME NOT NULL,
     hora_fin TIME NOT NULL,
     estado ENUM('disponible', 'ocupado') NOT NULL DEFAULT 'disponible',
     FOREIGN KEY (id_medico) REFERENCES Medicos(id) ON DELETE CASCADE
 );
+
+ALTER TABLE Pacientes ADD COLUMN cedula VARCHAR(20) NULL UNIQUE;
