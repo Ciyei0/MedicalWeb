@@ -90,7 +90,7 @@ ALTER TABLE Pacientes ADD COLUMN cedula VARCHAR(20) NULL UNIQUE;
 
 
 
--- insertar datos de prueba
+-- Aqui esta para ingresar datos a la base de datos
 
 -- Insertar Permisos
 INSERT INTO permiso (permiso) VALUES
