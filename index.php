@@ -24,7 +24,7 @@
         </nav>
         <div>
             <button class="btn btn-primary ">Agendar Cita</button>
-            <button class="btn btn-secondary"  onclick="window.location.href='login.php'" >Iniciar Sesión</button>
+            <button class="btn btn-secondary"  onclick="window.location.href='vistas/login.php'" >Iniciar Sesión</button>
             
         </div>
     </header>
@@ -36,21 +36,21 @@
                 <img src="img/banner1.jpg" class="d-block w-100" alt="Imagen 1">
                 <div class="carousel-caption">
                     <h1>VEN A CONOCER NUESTRO CENTRO DE CONTACTO</h1>
-                    <a href="cita.php" class="btn btn-primary">Agenda tu cita</a>
+                    <a href="vistas/cita.php" class="btn btn-primary">Agenda tu cita</a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="img/banner1.jpg" class="d-block w-100" alt="Imagen 2">
                 <div class="carousel-caption">
                     <h1>ATENCIÓN PERSONALIZADA</h1>
-                    <a href="cita.php" class="btn btn-primary">Agenda tu cita</a>
+                    <a href="vistas/cita.php" class="btn btn-primary">Agenda tu cita</a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="img/banner1.jpg" class="d-block w-100" alt="Imagen 3">
                 <div class="carousel-caption">
                     <h1>SERVICIO RÁPIDO Y EFECTIVO</h1>
-                    <a href="cita.php" class="btn btn-primary">Agenda tu cita</a>
+                    <a href="vistas/cita.php" class="btn btn-primary">Agenda tu cita</a>
                 </div>
             </div>
         </div>

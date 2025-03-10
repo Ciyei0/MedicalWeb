@@ -1,5 +1,5 @@
 <?php
-require_once 'config/conexion.php';
+require_once '../config/conexion.php';
 
 if (isset($_GET['medico_id']) && isset($_GET['fecha'])) {
     $medico_id = $_GET['medico_id'];

@@ -1,6 +1,6 @@
 <?php
-require_once 'config/conexion.php';
-require 'vendor/autoload.php'; // Asegúrate de que la ruta es correcta
+require_once '../config/conexion.php';
+require '../vendor/autoload.php'; // Asegúrate de que la ruta es correcta
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
