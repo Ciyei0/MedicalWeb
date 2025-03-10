@@ -14,7 +14,7 @@
 
     <!-- Header -->
     <header class="d-flex justify-content-between align-items-center p-3 bg-light">
-        <div class="logo">LOGO</div>
+        <div class="logo">MedicalWeb</div>
         <nav>
             <ul class="list-unstyled d-flex gap-3">
                 <li><a href="#sobre">Sobre Nosotros</a></li>
@@ -23,7 +23,7 @@
             </ul>
         </nav>
         <div>
-            <button class="btn btn-primary ">Agendar Cita</button>
+            <button class="btn btn-primary "  onclick="window.location.href='vistas/citas/cita.php'">Agendar Cita</button>
             <button class="btn btn-secondary"  onclick="window.location.href='vistas/login.php'" >Iniciar Sesión</button>
             
         </div>
@@ -36,21 +36,21 @@
                 <img src="img/banner1.jpg" class="d-block w-100" alt="Imagen 1">
                 <div class="carousel-caption">
                     <h1>VEN A CONOCER NUESTRO CENTRO DE CONTACTO</h1>
-                    <a href="vistas/cita.php" class="btn btn-primary">Agenda tu cita</a>
+                    <a href="vistas/citas/cita.php" class="btn btn-primary">Agenda tu cita</a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="img/banner1.jpg" class="d-block w-100" alt="Imagen 2">
                 <div class="carousel-caption">
                     <h1>ATENCIÓN PERSONALIZADA</h1>
-                    <a href="vistas/cita.php" class="btn btn-primary">Agenda tu cita</a>
+                    <a href="vistas/citas/cita.php" class="btn btn-primary">Agenda tu cita</a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="img/banner1.jpg" class="d-block w-100" alt="Imagen 3">
                 <div class="carousel-caption">
                     <h1>SERVICIO RÁPIDO Y EFECTIVO</h1>
-                    <a href="vistas/cita.php" class="btn btn-primary">Agenda tu cita</a>
+                    <a href="vistas/citas/cita.php" class="btn btn-primary">Agenda tu cita</a>
                 </div>
             </div>
         </div>

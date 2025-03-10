@@ -1,5 +1,5 @@
 <?php
-require_once '../config/conexion.php';
+require_once '../../config/conexion.php';
 
 // Obtener la lista de especialidades
 $stmt = $pdo->query("SELECT id, nombre FROM Especialidades");
@@ -81,7 +81,7 @@ $especialidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php echo htmlspecialchars($_GET['error']); ?>
             </div>
         <?php endif; ?>
-        <form action="../controladores/procesar_cita.php" method="POST">
+        <form action="../../controladores/procesar_cita.php" method="POST">
             <div class="row">
                 <!-- Columna Izquierda -->
                 <div class="col-md-6">
@@ -154,7 +154,7 @@ $especialidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 var especialidadId = $(this).val();
                 if (especialidadId) {
                     $.ajax({
-                        url: '../controladores/obtener_medicos.php',
+                        url: '../../controladores/obtener_medicos.php',
                         type: 'GET',
                         data: { especialidad_id: especialidadId },
                         success: function(response) {
@@ -171,7 +171,7 @@ $especialidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 var fecha = $('#fecha').val();
                 if (medicoId && fecha) {
                     $.ajax({
-                        url: '../controladores/obtener_horarios.php',
+                        url: '../../controladores/obtener_horarios.php',
                         type: 'GET',
                         data: { medico_id: medicoId, fecha: fecha },
                         success: function(response) {

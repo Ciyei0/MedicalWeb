@@ -8,9 +8,6 @@ CREATE TABLE permiso (
     permiso VARCHAR(50) NOT NULL UNIQUE
 );
 
-INSERT INTO permiso (permiso) VALUES
-('Escritorio'),
-('Citas');
 
 -- Tabla de Usuarios (Solo Médicos y Administración)
 CREATE TABLE Usuarios (
@@ -89,3 +86,67 @@ CREATE TABLE Horarios (
 );
 
 ALTER TABLE Pacientes ADD COLUMN cedula VARCHAR(20) NULL UNIQUE;
+
+
+
+
+-- insertar datos de prueba
+
+-- Insertar Permisos
+INSERT INTO permiso (permiso) VALUES
+('Escritorio'),
+('Citas'),
+('Medicos');
+
+
+-- Insertar Usuarios (incluyendo el Admin)
+INSERT INTO Usuarios (nombre, apellido, email, nombre_usuario, password_hash, cedula, telefono, direccion) VALUES
+('Admin', 'Admin', 'admin@hospital.com', 'admin', '123', '001-23456789', '1234567890', 'Dirección Admin'),
+('Juan', 'Pérez', 'juan@hospital.com', 'juanp', '123', '001-23456780', '1234567891', 'Dirección Juan'),
+('Maria', 'González', 'maria@hospital.com', 'mariag', '123', '001-23456781', '1234567892', 'Dirección Maria');
+('Jose', 'Martinez', 'jose@hospital.com', 'josem', '123', '001-23456736', '1234523892', 'Dirección Jose');
+
+-- Relación entre Usuarios y Permisos
+INSERT INTO usuario_permiso (id_usuario, id_permiso) VALUES
+(1, 1), -- Admin 
+(1, 2), 
+(1, 3), 
+(2, 1), -- Juan 
+(2, 2), 
+(2, 3), 
+(3, 1); -- Maria 
+(2, 2), 
+(2, 3), 
+(4, 1); -- Jose 
+(4, 2), 
+(4, 3),
+
+-- Insertar Especialidades Médicas
+INSERT INTO Especialidades (nombre, descripcion) VALUES
+('Cardiología', 'Especialidad en enfermedades del corazón'),
+('Pediatría', 'Especialidad en la atención de niños'),
+('Neurología', 'Especialidad en el sistema nervioso');
+
+-- Insertar Médicos
+INSERT INTO Medicos (id_usuario, id_especialidad, experiencia) VALUES
+(2, 1, '5 años de experiencia en Cardiología'),
+(3, 2, '3 años de experiencia en Pediatría'),
+(4, 3, '8 años de experiencia en Neurología');
+
+-- Insertar Pacientes (no es necesario que estén relacionados con usuarios)
+INSERT INTO Pacientes (nombre, apellido, email, cedula, telefono) VALUES
+('Carlos', 'Sánchez', 'carlos@paciente.com', '001-98765432', '0987654321'),
+('Laura', 'Martínez', 'laura@paciente.com', '001-98765433', '0987654322'),
+('Pedro', 'Jiménez', 'pedro@paciente.com', '001-98765434', '0987654323');
+
+-- Insertar Citas
+INSERT INTO Citas (id_paciente, id_medico, fecha, hora, observaciones) VALUES
+(1, 1, '2025-03-15', '10:00:00', 'Chequeo anual'),
+(2, 2, '2025-03-16', '11:00:00', 'Consulta por fiebre'),
+(3, 3, '2025-03-17', '09:00:00', 'Revisión de migrañas');
+
+-- Insertar Horarios de Médicos
+INSERT INTO Horarios (id_medico, dia_semana, hora_inicio, hora_fin, estado) VALUES
+(1, 'Lunes', '08:00:00', '14:00:00', 'disponible'),
+(2, 'Martes', '09:00:00', '15:00:00', 'disponible'),
+(3, 'Miércoles', '10:00:00', '16:00:00', 'disponible');

@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = isset($_POST["nombre_usuario"]) ? trim($_POST["nombre_usuario"]) : null;
     $contrasena = isset($_POST["clave"]) ? trim($_POST["clave"]) : null;
 
-    // Verificar que los campos no estén vacíos
     if (empty($usuario) || empty($contrasena)) {
         $error = "Por favor, complete todos los campos.";
     } else {
@@ -20,26 +19,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Consulta segura con prepared statements
-            $stmt = $pdo->prepare("SELECT id, clave FROM usuarios WHERE nombre_usuario = :usuario");
+            $stmt = $pdo->prepare("SELECT id, password_hash FROM usuarios WHERE nombre_usuario = :usuario");
             $stmt->bindParam(":usuario", $usuario, PDO::PARAM_STR);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Verificar si el usuario existe y la contraseña es correcta
-            if ($user && password_verify($contrasena, $user["clave"])) {
+            if ($user && password_verify($contrasena, $user["password_hash"])) {
                 $_SESSION["usuario_id"] = $user["id"];
                 $_SESSION["nombre_usuario"] = $usuario;
-                header("Location: controlpanel.php"); // Redirige al panel de control
+                header("Location: controlpanel.php"); 
                 exit();
             } else {
-                $error = "Usuario o contraseña incorrectos.";
+                $error = "Credenciales inválidas.";
             }
         } catch (Exception $e) {
-            $error = "Error: " . $e->getMessage();
+            $error = "Error interno. Intente nuevamente.";
         }
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
