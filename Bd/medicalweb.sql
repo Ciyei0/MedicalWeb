@@ -67,11 +67,11 @@ CREATE TABLE IF NOT EXISTS Pacientes (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Verificar y agregar columna 'cedula' en la tabla Pacientes
+
 ALTER TABLE Pacientes
     ADD COLUMN IF NOT EXISTS cedula VARCHAR(20) NULL UNIQUE AFTER email;
 
--- Tabla de Citas (Ahora referencia a Pacientes en lugar de Usuarios)
+
 CREATE TABLE IF NOT EXISTS Citas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_paciente INT NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS Horarios (
     FOREIGN KEY (id_medico) REFERENCES Medicos(id) ON DELETE CASCADE
 );
 
--- Insertar Permisos (si no existen)
+
 INSERT IGNORE INTO permiso (permiso) VALUES
 ('Escritorio'),
 ('Citas'),
@@ -122,31 +122,30 @@ INSERT IGNORE INTO usuario_permiso (id_usuario, id_permiso) VALUES
 (4, 2), 
 (4, 3);
 
--- Insertar Especialidades Médicas (si no existen)
+-- Insertar tablas (si no existen)
 INSERT IGNORE INTO Especialidades (nombre, descripcion) VALUES
 ('Cardiología', 'Especialidad en enfermedades del corazón'),
 ('Pediatría', 'Especialidad en la atención de niños'),
 ('Neurología', 'Especialidad en el sistema nervioso');
 
--- Insertar Médicos (si no existen)
+
 INSERT IGNORE INTO Medicos (id_usuario, id_especialidad, experiencia) VALUES
 (2, 1, '5 años de experiencia en Cardiología'),
 (3, 2, '3 años de experiencia en Pediatría'),
 (4, 3, '8 años de experiencia en Neurología');
 
--- Insertar Pacientes (si no existen)
+
 INSERT IGNORE INTO Pacientes (nombre, apellido, email, cedula, telefono) VALUES
 ('Carlos', 'Sánchez', 'carlos@paciente.com', '001-98765432', '0987654321'),
 ('Laura', 'Martínez', 'laura@paciente.com', '001-98765433', '0987654322'),
 ('Pedro', 'Jiménez', 'pedro@paciente.com', '001-98765434', '0987654323');
 
--- Insertar Citas (si no existen)
 INSERT IGNORE INTO Citas (id_paciente, id_medico, fecha, hora, observaciones) VALUES
 (1, 1, '2025-03-15', '10:00:00', 'Chequeo anual'),
 (2, 2, '2025-03-16', '11:00:00', 'Consulta por fiebre'),
 (3, 3, '2025-03-17', '09:00:00', 'Revisión de migrañas');
 
--- Insertar Horarios de Médicos (si no existen)
+
 INSERT IGNORE INTO Horarios (id_medico, dia_semana, hora_inicio, hora_fin, estado) VALUES
 (1, 'Lunes', '08:00:00', '14:00:00', 'disponible'),
 (2, 'Martes', '09:00:00', '15:00:00', 'disponible'),

@@ -30,10 +30,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($contrasena, $user["password_hash"])) {
+                // Guardar el ID de usuario en la sesión
                 $_SESSION["usuario_id"] = $user["id"];
                 $_SESSION["nombre_usuario"] = $usuario;
-                header("Location: controlpanel.php"); 
-                exit();
+
+                // Obtener el id_medico asociado al usuario
+                $stmt = $pdo->prepare("SELECT id FROM medicos WHERE id_usuario = :id_usuario");
+                $stmt->bindParam(":id_usuario", $user["id"], PDO::PARAM_INT);
+                $stmt->execute();
+                $medico = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($medico) {
+                    // cambie la direccion al control panel
+                    header("Location: admin/controlpanel.php?id_medico=" . $medico["id"]);
+                    exit();
+                } else {
+                    $error = "No se encontró un médico asociado a este usuario.";
+                }
             } else {
                 $error = "Credenciales inválidas.";
             }
@@ -44,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="../css/styleslogin.css">
-
 </head>
 <body>
     <div class="login-container">

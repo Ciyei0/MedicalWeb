@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $citas_count = $stmt->fetchColumn();
 
     if ($citas_count > 0) {
-        header("Location: cita.php?error=El médico no está disponible en el horario seleccionado.");
+        echo "El médico ya tiene una cita programada a esa hora.";
         exit();
     }
 
