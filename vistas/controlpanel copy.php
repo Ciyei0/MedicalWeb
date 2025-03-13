@@ -1,21 +1,21 @@
 <?php 
+ob_start(); // Inicia el buffer de salida para evitar errores de cabeceras
+session_start(); // Debe ir antes de cualquier salida
 include '../templates/header.php';
 
 // Verificar si el usuario ha iniciado sesión
-// if (!isset($_SESSION['usuario'])) {
-//     header("Location: login_view.php");
-//     exit();
-// }
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login_view.php");
+    exit();
+}
 
 // Obtener el rol del usuario
-// $rol = $_SESSION['rol'] ?? 'invitado';
-
+$rol = $_SESSION['rol']; // Debe ser 'medico', 'recepcionista' o 'administrador'
 ?>
 
 <h1>Bienvenido a MedicalWeb</h1>
-<p>Usuario: <?php echo $_SESSION['usuario'] ?? 'Invitado'; ?></p>
-
-<!-- Aquí puedes habilitar la vista según el rol -->
+<p>Usuario: <?php echo $_SESSION['usuario']; ?></p>
+<p>Rol: <?php echo ucfirst($rol); ?></p>
 
 <?php if ($rol === 'medico'): ?>
     <h2>Agenda de Citas</h2>
@@ -28,9 +28,9 @@ include '../templates/header.php';
     <p>Gráficos y reportes generales del sistema.</p>
 <?php endif; ?>
 
-
 <a href="logout.php">Cerrar Sesión</a>
 
 <?php 
 include '../templates/footer.php'; 
+ob_end_flush(); // Envía el buffer de salida y limpia
 ?>
