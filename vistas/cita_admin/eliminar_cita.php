@@ -12,16 +12,16 @@ if ($id_cita > 0) {
 
     if ($stmt && $stmt->execute([$id_cita])) {
         // Redirigir a la página de citas con un mensaje de éxito
-        header("Location: ver_citas.php?id_medico=" . $_GET['id_medico']  . "&mensaje=Cita eliminada correctamente");
+        header("Location: ver_citas.php?mensaje=exito");
         exit();
     } else {
         // Redirigir con un mensaje de error
-        header("Location: ver_citas.php?id_medico=" . $_GET['id_medico'] . "&error=Error al eliminar la cita");
+        header("Location: ver_citas.php?mensaje=error");
         exit();
     }
 } else {
     // Redirigir si no se proporciona un ID de cita válido
-    header("Location: ver_citas.php?id_medico=" . $_GET['id_medico'] . "&error=ID de cita no válido");
+    header("Location: ver_citas.php");
     exit();
 }
 ?>

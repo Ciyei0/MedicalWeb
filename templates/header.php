@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once '../../config/conexion.php';
 // Verificar si el usuario está autenticado y tiene un rol asignado
 if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol'])) {

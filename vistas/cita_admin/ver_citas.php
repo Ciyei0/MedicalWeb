@@ -1,7 +1,6 @@
 <?php
-session_start();
-
-
+// Incluir el header
+include '../../templates/header.php';
 // Verificar si el usuario está autenticado y tiene un rol asignado
 if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol'])) {
     echo "Solo personal autorizado.";
@@ -11,14 +10,7 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol'])) {
 // Variables para facilitar el manejo de los enlaces
 $rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesión
 
-?>
 
-
-
-<?php
-
-// Incluir el header
-include '../../templates/header_admin.php';
 
 // Incluir la conexión desde la carpeta config
 require_once '../../config/conexion.php';
@@ -34,28 +26,39 @@ try {
     }
 
     // Consulta para obtener todas las citas, pacientes y médicos asociados
-    $stmt = $pdo->prepare("
-    SELECT 
-        citas.id AS id_cita,
-        citas.fecha,
-        citas.hora,
-        citas.observaciones,
-        pacientes.nombre AS paciente_nombre,
-        pacientes.apellido AS paciente_apellido,
-        pacientes.email AS paciente_email,
-        pacientes.telefono AS paciente_telefono,
-        usuarios.nombre AS medico_nombre,  -- Cambia 'medicos.nombre_medico' a 'usuarios.nombre'
-        usuarios.apellido AS medico_apellido  -- Agregamos también el apellido del médico
-    FROM 
-        citas
-    JOIN 
-        pacientes ON citas.id_paciente = pacientes.id
-    JOIN 
-        medicos ON citas.id_medico = medicos.id
-    JOIN
-        usuarios ON medicos.id_usuario = usuarios.id  -- Unimos la tabla 'usuarios' para obtener el nombre del médico
-");
-    $stmt->execute();
+    $query = "
+        SELECT 
+            citas.id AS id_cita,
+            citas.fecha,
+            citas.hora,
+            citas.observaciones,
+            pacientes.nombre AS paciente_nombre,
+            pacientes.apellido AS paciente_apellido,
+            pacientes.email AS paciente_email,
+            pacientes.telefono AS paciente_telefono,
+            usuarios.nombre AS medico_nombre,  -- Cambia 'medicos.nombre_medico' a 'usuarios.nombre'
+            usuarios.apellido AS medico_apellido  -- Agregamos también el apellido del médico
+        FROM 
+            citas
+        JOIN 
+            pacientes ON citas.id_paciente = pacientes.id
+        JOIN 
+            medicos ON citas.id_medico = medicos.id
+        JOIN
+            usuarios ON medicos.id_usuario = usuarios.id  -- Unimos la tabla 'usuarios' para obtener el nombre del médico
+    ";
+
+    // Si el usuario no es administrador, filtrar por su ID de médico
+    if ($rol != 'admin') {
+        $query .= " WHERE medicos.id_usuario = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$_SESSION['usuario_id']]);
+    } else {
+        // Si es administrador, obtener todas las citas sin filtrar
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+    }
+
     $citas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     // Mostrar el error en la página para depurar
@@ -77,30 +80,11 @@ try {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h4 class="text-center">MedicalWeb</h4>
-        <!-- Enlaces visibles dependiendo del rol del usuario -->
-        <?php if ($rol == 'admin' || $rol == 'recepcionista') : ?>
-            <a href="controlpanel.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'controlpanel.php') ? 'active' : ''; ?>">Escritorio</a>
-            <a href="ver_citas.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'ver_citas.php') ? 'active' : ''; ?>">Ver Citas</a>
-        <?php endif; ?>
-        <!-- Opción para cerrar sesión -->
-        <a href="../logout.php" class="text-danger">Cerrar sesión</a>
-    </div>
-
-    <!-- Contenido Principal -->
-    <div class="content">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="controlpanel.php">Gestión de citas y agenda</a>
-            </div>
-        </nav>
 
         <!-- Sección de Citas -->
-        <div class="container mt-4">
+        <div class="container mt-4 mb-2">
             <h2>Listado de Citas</h2>
 
             <?php if (!empty($error)) : ?>
@@ -110,8 +94,19 @@ try {
             <?php endif; ?>
 
             <!-- Tabla de Citas -->
-            <table class="table table-bordered">
-
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Paciente</th>
+                        <th>Médico</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th> <!-- Nueva columna para acciones -->
+                    </tr>
+                </thead>
                 <tbody>
                     <?php if (!empty($citas)) : ?>
                         <?php foreach ($citas as $cita) : ?>
@@ -119,15 +114,19 @@ try {
                                 <td><?php echo htmlspecialchars($cita['fecha']); ?></td>
                                 <td><?php echo htmlspecialchars($cita['hora']); ?></td>
                                 <td><?php echo htmlspecialchars($cita['paciente_nombre'] . " " . $cita['paciente_apellido']); ?></td>
-                                <td><?php echo htmlspecialchars($cita['medico_nombre']); ?></td>
+                                <td><?php echo htmlspecialchars($cita['medico_nombre'] . " " . $cita['medico_apellido']); ?></td>
                                 <td><?php echo htmlspecialchars($cita['paciente_email']); ?></td>
                                 <td><?php echo htmlspecialchars($cita['paciente_telefono']); ?></td>
                                 <td><?php echo htmlspecialchars($cita['observaciones']); ?></td>
+                                <td>
+                                    <a href='editar_cita.php?id_cita=<?php echo $cita['id_cita']; ?>' class='btn btn-warning btn-sm'>Editar</a>
+                                    <a href='eliminar_cita.php?id_cita=<?php echo $cita['id_cita']; ?>' class='btn btn-danger btn-sm' onclick='return confirm("¿Estás seguro de eliminar esta cita?")'>Eliminar</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else : ?>
                         <tr>
-                            <td colspan="5" class="text-center">No hay citas disponibles.</td>
+                            <td colspan="8" class="text-center">No hay citas disponibles.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

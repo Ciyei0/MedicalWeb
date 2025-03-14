@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea class="form-control" id="observaciones" name="observaciones" rows="3"><?php echo htmlspecialchars($cita['observaciones']); ?></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            <a href="ver_citas.php?id_medico=<?php echo htmlspecialchars($_GET['id_medico']); ?>" class="btn btn-secondary">Cancelar</a>
+            <a href="ver_citas.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </body>

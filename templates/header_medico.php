@@ -76,6 +76,8 @@ if (isset($_SESSION["id_medico"])) {
         <h4 class="text-center">MedicalWeb</h4>
         <a href="controlpanel.php?id_medico=<?php echo $id_medico; ?>" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'controlpanel.php') ? 'active' : ''; ?>">Escritorio</a>
         <a href="/medicalweb/vistas/cita_medicos/ver_citas.php?id_medico=<?php echo $id_medico; ?>" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'ver_citas.php') ? 'active' : ''; ?>">Citas</a>
+                <!-- Opción para cerrar sesión -->
+                <a href="logout.php" class="text-danger">Cerrar sesión</a>
     </div>
 
     <!-- Contenido Principal -->
