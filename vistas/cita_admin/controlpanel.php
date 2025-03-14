@@ -5,4 +5,7 @@
 <p>Aquí puedes gestionar las citas y agenda</p>
 
 
+
+
+
 <?php include '../../templates/footer.php'; ?>

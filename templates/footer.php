@@ -2,7 +2,7 @@
 
 <!-- Footer -->
 <footer class="footer">
-    <p>&copy; 2023 MedicalWeb. Todos los derechos reservados.</p>
+    <p>&copy; 2025 MedicalWeb. Todos los derechos reservados.</p>
 </footer>
 
 <!-- Bootstrap JS -->

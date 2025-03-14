@@ -1,4 +1,4 @@
-<?php include '../templates/header.php'; ?>
+<?php include '../templates/header_medico.php'; ?>
 
 
 <h1>Bienvenido a MedicalWeb</h1>
