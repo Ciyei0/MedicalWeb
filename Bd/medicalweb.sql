@@ -98,9 +98,9 @@ CREATE TABLE IF NOT EXISTS Horarios (
 
 
 INSERT IGNORE INTO permiso (permiso) VALUES
-('Escritorio'),
-('Citas'),
-('Medicos');
+('admin'),
+('recepcionista'),
+('medico');
 
 -- Insertar Usuarios (incluyendo el Admin)
 INSERT IGNORE INTO Usuarios (nombre, apellido, email, nombre_usuario, password_hash, cedula, telefono, direccion) VALUES
@@ -108,19 +108,16 @@ INSERT IGNORE INTO Usuarios (nombre, apellido, email, nombre_usuario, password_h
 ('Juan', 'Pérez', 'juan@hospital.com', 'juanp', '123', '001-23456780', '1234567891', 'Dirección Juan'),
 ('Maria', 'González', 'maria@hospital.com', 'mariag', '123', '001-23456781', '1234567892', 'Dirección Maria'),
 ('Jose', 'Martinez', 'jose@hospital.com', 'josem', '123', '001-23456736', '1234523892', 'Dirección Jose');
+('Sebastian', 'Martinez', 'sebas@hospital.com', 'sebas', '123', '402-23456736', '1284523892', 'Dirección Sebas');
 
 -- Relación entre Usuarios y Permisos (si no existen)
 INSERT IGNORE INTO usuario_permiso (id_usuario, id_permiso) VALUES
-(1, 1), -- Admin 
-(1, 2), 
-(1, 3), 
-(2, 1), -- Juan 
-(2, 2), 
-(2, 3), 
-(3, 1), -- Maria 
-(4, 1), -- Jose 
-(4, 2), 
-(4, 3);
+(1, 1), -- Admin  
+(2, 3), -- Juan medico 
+(3, 3), -- Maria medico 
+(4, 3), -- Jose medico
+(5, 2); -- Sebas recepcionista
+
 
 -- Insertar tablas (si no existen)
 INSERT IGNORE INTO Especialidades (nombre, descripcion) VALUES
