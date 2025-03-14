@@ -1,17 +1,4 @@
-<?php
-session_start();
 
-require_once '../../config/conexion.php';
-// Verificar si el usuario está autenticado y tiene un rol asignado
-if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol'])) {
-    echo "Solo personal autorizado.";
-    exit();
-}
-
-// Variables para facilitar el manejo de los enlaces
-$rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesión
-
-?>
 
 
 
@@ -72,28 +59,3 @@ $rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesió
         }
     </style>
 </head>
-<body>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h4 class="text-center">MedicalWeb</h4>
-        <!-- Enlaces visibles dependiendo del rol del usuario -->
-        <?php if ($rol == 'admin' || $rol == 'recepcionista') : ?>
-            <a href="controlpanel.php">Escritorio</a>
-            <a href="ver_citas.php">Ver Citas</a>
-        <?php endif; ?>
-        
-        <!-- Opción para cerrar sesión -->
-        <a href="logout.php" class="text-danger">Cerrar sesión</a>
-    </div>
-
-    <!-- Contenido Principal -->
-    <div class="content">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="controlpanel.php">Gestión de citas y agenda</a>
-            </div>
-        </nav>
-
-        <!-- El contenido dinámico se incluirá aquí -->

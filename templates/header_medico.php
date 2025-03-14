@@ -1,19 +1,16 @@
-<?php
-session_start();
 
-require_once '../../config/conexion.php';
-// Verificar si el usuario está autenticado y tiene un rol asignado
-if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol'])) {
-    echo "Solo personal autorizado.";
+<?php
+// Verificar si existe el id_medico en sesión o en la URL
+if (isset($_SESSION["id_medico"])) {
+    $id_medico = $_SESSION["id_medico"];
+} elseif (isset($_GET['id_medico'])) {
+    $id_medico = intval($_GET['id_medico']);
+} else {
+    echo "No se proporcionó un ID de médico.";
     exit();
 }
 
-// Variables para facilitar el manejo de los enlaces
-$rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesión
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -77,14 +74,8 @@ $rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesió
     <!-- Sidebar -->
     <div class="sidebar">
         <h4 class="text-center">MedicalWeb</h4>
-        <!-- Enlaces visibles dependiendo del rol del usuario -->
-        <?php if ($rol == 'admin' || $rol == 'recepcionista') : ?>
-            <a href="controlpanel.php">Escritorio</a>
-            <a href="ver_citas.php">Ver Citas</a>
-        <?php endif; ?>
-        
-        <!-- Opción para cerrar sesión -->
-        <a href="logout.php" class="text-danger">Cerrar sesión</a>
+        <a href="controlpanel.php?id_medico=<?php echo $id_medico; ?>" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'controlpanel.php') ? 'active' : ''; ?>">Escritorio</a>
+        <a href="/medicalweb/vistas/cita_medicos/ver_citas.php?id_medico=<?php echo $id_medico; ?>" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'ver_citas.php') ? 'active' : ''; ?>">Citas</a>
     </div>
 
     <!-- Contenido Principal -->
@@ -92,7 +83,7 @@ $rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesió
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="controlpanel.php">Gestión de citas y agenda</a>
+                <a class="navbar-brand" href="controlpanel.php?id_medico=<?php echo $id_medico; ?>">Gestión de citas y agenda</a>
             </div>
         </nav>
 

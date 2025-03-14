@@ -63,7 +63,6 @@ try {
     $error = "Error al obtener las citas: " . $e->getMessage();  // Mostrar el error específico
 }
 
-
 ?>
 
 <!DOCTYPE html>
