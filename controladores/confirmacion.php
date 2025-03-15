@@ -71,7 +71,7 @@
             <div class="confirmation-icon">✓</div>
             <h4 class="alert-heading">Cita Agendada con Éxito</h4>
             <p>Por favor, confirme su cita a través del enlace enviado a su correo electrónico.</p>
-            <a href="index.php" class="btn-home">Volver al Inicio</a>
+            <a href="../index.php" class="btn-home">Volver al Inicio</a>
         </div>
     </div>
 

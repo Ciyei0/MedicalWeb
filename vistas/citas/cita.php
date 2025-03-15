@@ -101,10 +101,53 @@ $especialidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <label for="telefono">Teléfono</label>
                         <input type="text" id="telefono" name="telefono" class="form-control" required>
                     </div>
+                  
                     <div class="form-group mb-3">
-                        <label for="cedula">Cédula</label>
-                        <input type="text" id="cedula" name="cedula" class="form-control" maxlength="11" required>
+                        <label for="tipo_identificacion">Tipo de Identificación</label>
+                        <select id="tipo_identificacion" name="tipo_identificacion" class="form-control" required>
+                            <option value="">Seleccione el tipo de identificación</option>
+                            <option value="cedula">Cédula</option>
+                            <option value="pasaporte">Pasaporte</option>
+                        </select>
                     </div>
+                    <div class="form-group mb-3" id="cedula-group" style="display: none;">
+                        <label for="cedula">Cédula</label>
+                        <input type="text" id="cedula" name="cedula" class="form-control" maxlength="13">
+                    </div>
+                    <div class="form-group mb-3" id="pasaporte-group" style="display: none;">
+                        <label for="pasaporte">Pasaporte</label>
+                        <input type="text" id="pasaporte" name="pasaporte" class="form-control">
+                    </div>
+    
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $('#tipo_identificacion').on('change', function() {
+                                var tipo = $(this).val();
+                                if (tipo === 'cedula') {
+                                    $('#cedula-group').show();
+                                    $('#pasaporte-group').hide();
+                                } else if (tipo === 'pasaporte') {
+                                    $('#cedula-group').hide();
+                                    $('#pasaporte-group').show();
+                                } else {
+                                    $('#cedula-group').hide();
+                                    $('#pasaporte-group').hide();
+                                }
+                            });
+
+                            $('#cedula').on('input', function() {
+                                var value = $(this).val().replace(/\D/g, '');
+                                if (value.length > 3 && value.length <= 10) {
+                                    value = value.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+                                } else if (value.length > 10) {
+                                    value = value.replace(/(\d{3})(\d{7})(\d{1})/, '$1-$2-$3');
+                                }
+                                $(this).val(value);
+                            });
+                        });
+                    </script>
+    
                 </div>
 
                 <!-- Columna Derecha -->

@@ -44,7 +44,7 @@
             <div class="success-icon">✓</div>
             <h4 class="mb-3 text-success">Cita Confirmada con Éxito</h4>
             <p class="text-muted mb-4">Su cita ha sido confirmada. Gracias por utilizar nuestro servicio.</p>
-            <a href="index.php" class="btn btn-home text-white">Volver al Inicio</a>
+            <a href="../../index.php" class="btn btn-home text-white">Volver al Inicio</a>
         </div>
     </div>
 </body>

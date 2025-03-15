@@ -147,3 +147,5 @@ INSERT IGNORE INTO Horarios (id_medico, dia_semana, hora_inicio, hora_fin, estad
 (1, 'Lunes', '08:00:00', '14:00:00', 'disponible'),
 (2, 'Martes', '09:00:00', '15:00:00', 'disponible'),
 (3, 'Miércoles', '10:00:00', '16:00:00', 'disponible');
+
+ALTER TABLE Citas ADD COLUMN estado VARCHAR(50) DEFAULT 'pendiente';

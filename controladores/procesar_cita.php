@@ -10,7 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apellido = $_POST['apellido'];
     $telefono = $_POST['telefono'];
     $email = $_POST['email'];
+    $tipo_identificacion = $_POST['tipo_identificacion'];
     $cedula = $_POST['cedula'];
+    $pasaporte = $_POST['pasaporte'];
     $medico_id = $_POST['medico'];
     $fecha = $_POST['fecha'];
     $hora = $_POST['hora'];
@@ -46,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $paciente_id = $paciente['id'];
     } else {
         // Insertar el paciente si no existe
-        $stmt = $pdo->prepare("INSERT INTO Pacientes (nombre, apellido, email, telefono, cedula) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$nombre, $apellido, $email, $telefono, $cedula]);
+        $stmt = $pdo->prepare("INSERT INTO Pacientes (nombre, apellido, email, telefono, cedula, pasaporte) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$nombre, $apellido, $email, $telefono, $cedula, $pasaporte]);
         $paciente_id = $pdo->lastInsertId();
     }
 
@@ -86,24 +88,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Contenido del correo
         $mail->isHTML(true);
-        $mail->Subject = 'Confirmación de Cita Médica';
+        $mail->Subject = 'Confirmacion de Cita Medica';
         $mail->Body    = "
             <html>
             <head>
-                <title>Confirmación de Cita Médica</title>
+                <title>Confirmacion de Cita Medica</title>
             </head>
             <body>
                 <h2>Detalles de su Cita</h2>
                 <p><strong>Nombre:</strong> $nombre $apellido</p>
                 <p><strong>Fecha:</strong> $fecha</p>
                 <p><strong>Hora:</strong> $hora</p>
-                <p><strong>Médico:</strong> $nombre_medico ($especialidad_medico)</p>
+                <p><strong>Medico:</strong> $nombre_medico ($especialidad_medico)</p>
                 <p><strong>Observaciones:</strong> $observaciones</p>
                 <p>Por favor, confirme su cita haciendo clic en el siguiente enlace:</p>
-                <a href='http://localhost/MedicalWeb/confirmar_cita.php?id=$paciente_id&fecha=$fecha&hora=$hora'>Confirmar Cita</a>
+                <a href=' http://localhost/MedicalWeb/vistas/citas/confirmar_cita.php?id=$paciente_id&fecha=$fecha&hora=$hora'>Confirmar Cita</a>
             </body>
             </html>
         ";
+
+        
 
         $mail->send();
         // Redirigir a la página de confirmación
