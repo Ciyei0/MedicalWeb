@@ -79,17 +79,30 @@ if (isset($_SESSION["id_medico"])) {
                 <!-- Opción para cerrar sesión -->
                 <a href="#" onclick="confirmarLogout()" class="text-danger">Cerrar Sesión</a>
 
-                <form id="logoutForm" method="POST" action="../../controladores/logout.php" style="display: none;">
-                    <input type="hidden" name="logout" value="1">
-                </form>
+        <form id="logoutForm" method="POST" action="../../controladores/logout.php" style="display: none;">
+            <input type="hidden" name="logout" value="1">
+        </form>
 
-                <script>
-                    function confirmarLogout() {
-                        if (confirm("¿Está seguro de que desea cerrar sesión?")) {
-                            document.getElementById("logoutForm").submit();
-                        }
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function confirmarLogout() {
+                Swal.fire({
+                    title: "¿Está seguro?",
+                    text: "Se cerrará su sesión.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Sí, cerrar sesión",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("logoutForm").submit();
                     }
-</script>
+                });
+            }
+        </script>
+
 
                 
 

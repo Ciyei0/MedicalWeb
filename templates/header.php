@@ -84,19 +84,35 @@ $rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesió
         <?php endif; ?>
         
         <!-- Opción para cerrar sesión -->
-        <a href="#" onclick="confirmarLogout()" class="text-danger">Cerrar Sesión</a>
+        <!-- Enlace para cerrar sesión -->
+    <a href="#" onclick="confirmarLogout()" class="text-danger">Cerrar Sesión</a>
 
-        <form id="logoutForm" method="POST" action="../../controladores/logout.php" style="display: none;">
-            <input type="hidden" name="logout" value="1">
-        </form>
+    <!-- Formulario oculto para cerrar sesión -->
+    <form id="logoutForm" method="POST" action="../../controladores/logout.php" style="display: none;">
+        <input type="hidden" name="logout" value="1">
+    </form>
 
-        <script>
-            function confirmarLogout() {
-                if (confirm("¿Está seguro de que desea cerrar sesión?")) {
+    <!-- SweetAlert Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmarLogout() {
+            Swal.fire({
+                title: "¿Está seguro?",
+                text: "Se cerrará su sesión.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Sí, cerrar sesión",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
                     document.getElementById("logoutForm").submit();
                 }
-            }
-        </script>
+            });
+        }
+    </script>
+
 
 
     </div>

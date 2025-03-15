@@ -107,7 +107,7 @@ INSERT IGNORE INTO Usuarios (nombre, apellido, email, nombre_usuario, password_h
 ('Admin', 'Admin', 'admin@hospital.com', 'admin', '123', '001-23456789', '1234567890', 'Dirección Admin'),
 ('Juan', 'Pérez', 'juan@hospital.com', 'juanp', '123', '001-23456780', '1234567891', 'Dirección Juan'),
 ('Maria', 'González', 'maria@hospital.com', 'mariag', '123', '001-23456781', '1234567892', 'Dirección Maria'),
-('Jose', 'Martinez', 'jose@hospital.com', 'josem', '123', '001-23456736', '1234523892', 'Dirección Jose');
+('Jose', 'Martinez', 'jose@hospital.com', 'josem', '123', '001-23456736', '1234523892', 'Dirección Jose'),
 ('Sebastian', 'Martinez', 'sebas@hospital.com', 'sebas', '123', '402-23456736', '1284523892', 'Dirección Sebas');
 
 -- Relación entre Usuarios y Permisos (si no existen)
