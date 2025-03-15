@@ -77,7 +77,22 @@ if (isset($_SESSION["id_medico"])) {
         <a href="controlpanel.php?id_medico=<?php echo $id_medico; ?>" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'controlpanel.php') ? 'active' : ''; ?>">Escritorio</a>
         <a href="/medicalweb/vistas/cita_medicos/ver_citas.php?id_medico=<?php echo $id_medico; ?>" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'ver_citas.php') ? 'active' : ''; ?>">Citas</a>
                 <!-- Opción para cerrar sesión -->
-                <a href="logout.php" class="text-danger">Cerrar sesión</a>
+                <a href="#" onclick="confirmarLogout()" class="text-danger">Cerrar Sesión</a>
+
+                <form id="logoutForm" method="POST" action="../../controladores/logout.php" style="display: none;">
+                    <input type="hidden" name="logout" value="1">
+                </form>
+
+                <script>
+                    function confirmarLogout() {
+                        if (confirm("¿Está seguro de que desea cerrar sesión?")) {
+                            document.getElementById("logoutForm").submit();
+                        }
+                    }
+</script>
+
+                
+
     </div>
 
     <!-- Contenido Principal -->

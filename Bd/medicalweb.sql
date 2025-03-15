@@ -117,7 +117,7 @@ INSERT IGNORE INTO usuario_permiso (id_usuario, id_permiso) VALUES
 (3, 3), -- Maria medico 
 (4, 3), -- Jose medico
 (5, 2); -- Sebas recepcionista
-
+    
 
 -- Insertar tablas (si no existen)
 INSERT IGNORE INTO Especialidades (nombre, descripcion) VALUES

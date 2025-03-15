@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once '../../config/conexion.php';
 // Verificar si el usuario está autenticado y tiene un rol asignado
@@ -83,7 +84,21 @@ $rol = $_SESSION['rol']; // Asegurarse de que el rol esté definido en la sesió
         <?php endif; ?>
         
         <!-- Opción para cerrar sesión -->
-        <a href="logout.php" class="text-danger">Cerrar sesión</a>
+        <a href="#" onclick="confirmarLogout()" class="text-danger">Cerrar Sesión</a>
+
+        <form id="logoutForm" method="POST" action="../../controladores/logout.php" style="display: none;">
+            <input type="hidden" name="logout" value="1">
+        </form>
+
+        <script>
+            function confirmarLogout() {
+                if (confirm("¿Está seguro de que desea cerrar sesión?")) {
+                    document.getElementById("logoutForm").submit();
+                }
+            }
+        </script>
+
+
     </div>
 
     <!-- Contenido Principal -->
