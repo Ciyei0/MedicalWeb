@@ -1,6 +1,6 @@
 <?php 
 
-$host = "localhost"; // Cambia si tu servidor es diferente
+$host = "localhost:3307"; // Cambia si tu servidor es diferente
 $dbname = "medicalweb"; // Reemplaza con el nombre real de tu base de datos
 $username = "root"; // Usuario de tu base de datos
 $password = ""; // Contraseña de la base de datos

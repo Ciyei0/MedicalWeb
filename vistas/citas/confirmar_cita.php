@@ -1,5 +1,5 @@
 <?php
-require_once '../config/conexion.php';
+require_once '../../config/conexion.php';
 
 if (isset($_GET['id']) && isset($_GET['fecha']) && isset($_GET['hora'])) {
     $paciente_id = $_GET['id'];
@@ -14,4 +14,5 @@ if (isset($_GET['id']) && isset($_GET['fecha']) && isset($_GET['hora'])) {
     header("Location: cita_confirmada.php");
     exit();
 }
+
 ?>
